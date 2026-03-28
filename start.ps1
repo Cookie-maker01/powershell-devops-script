@@ -1,43 +1,39 @@
-Set-Location $PSScriptRoot
+param(
+  $env = "dev"
+)
 
-#Item name
-#$project = "DemoApp"
+Set-Location $PSScriptBoot
 
-Write-output "Starting project..."
-
-# Git pull the newest code (if it is a git item)
-if (Test-Path ".git") {
-  Write-output "Git repo detected, pulling latest code..."
-  git pull
+function Update-Code {
+  if (Test-Path ".git") {
+    Write-Output "Pulling latest code..."
+    git pull
+  }
 }
 
-# Node.js item (React / Vue / Next)
-if (Test-Path "package.json") {
-  Write-output "Node.js project detected"
-
-  if (Test-Path "Package-lock.json") {
-    npm install
-  } else {
-  npm install
-  } 
-
-  npm run dev
+function Install-Dependencies {
+  if (Test-Path "package.json") {
+    Write-Output "Installing dependencies..."
+    if (!(Test-Path "node modules")) {
+      npm install
+    }
+  }
 }
 
-# .NET item
-elseif  (Get-ChildItem *.csproj -ErrorAction SilentlyContinue) {
-  Write-output ".NET project detected"
-  dotent run
+function Start-App {
+  if (Test-Path "package.json") {
+    if ($env -eq "dev") {
+      Write-Output "Starting dev server..."
+      npm run dev
+      Start-Process "http://localhost:3000"
+    }
+    elseif ($env -eq "prod") {
+      Write-Output "Starting production..."
+      npm sratr
+    }
+  }
 }
 
-# Python item
-elseif (Test-Path "requirements.txt") {
-  Write-output "Python project detected"
-  pip install -r requirements.txt
-  Python main.py 
-}
-
-# undetected
-else {
-  Write-output "Unknow project type"
-}
+Update-Code
+Install-Dependencies
+Start-App
