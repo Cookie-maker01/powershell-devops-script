@@ -13,11 +13,13 @@ Node.js (React / Vue)
 ⚙️ Environment-based execution (dev / prod)
 🧠 DevOps-oriented workflow automation
 
-📁 Project Structure
+
+## 📁 Project Structure
 .
 ├── start.ps1
 ├── README.md
 ├── .gitignore
+
 
 ## ▶️ Usage
 
@@ -29,13 +31,15 @@ Run in production mode
 🧪 Example Workflow
 git pull → install dependencies → start server
 
+
 ## 🛠️ Tech
 
 PowerShell
 Git
 Node.js / .NET
 
-💡 DevOps Concept
+
+## 💡 DevOps Concept
 
 This script demonstrates basic DevOps practices:
 
@@ -49,6 +53,7 @@ Logging system (.log)
 Error handling (try/catch)
 Multi-service startup (frontend + backend)
 CI/CD integration
+
 
 ## 📸 Demo
 
