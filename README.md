@@ -9,7 +9,8 @@ Node.js (React / Vue)
 .NET
 📦 Automatically install dependencies
 🔄 Pull latest Git code
-🚀 Start development or production server
+🔍 Tracking execution flows and errors 
+🚀 Start development or production server (Frontend / Backend)
 ⚙️ Environment-based execution (dev / prod)
 🧠 DevOps-oriented workflow automation
 
@@ -29,7 +30,7 @@ Run in production mode
 .\start.ps1 -env prod
 
 🧪 Example Workflow
-git pull → install dependencies → start server
+Pull latest code → Install dependencies → Start backend → Start frontend → Log output → Handle errors
 
 
 ## 🛠️ Tech
