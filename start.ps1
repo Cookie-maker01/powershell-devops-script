@@ -33,8 +33,8 @@ function Update-Code {
 function Install-Dependencies {
   try {
     if (Test-Path "package.json") {
-        Write-Output "Installing dependencies..."
-        if (!(Test-Path "node modules")) {
+        Write-Log "Installing dependencies..."
+        if (!(Test-Path "node_modules")) {
         npm install
     }
   }
@@ -46,7 +46,7 @@ function Install-Dependencies {
 function Start-Frontend {
   if (Test-Path "package.json") {
     try {
-        Write-Output "Starting Frontend..."
+        Write-Log "Starting Frontend..."
         npm run dev
     }
     catch {
@@ -58,8 +58,8 @@ function Start-Frontend {
 function Start-Backend {
   if (Get-ChildItem *.csproj -ErrorAction SilentlyContinue) {
     try {
-        Write-Output "Starting Backend..."
-        donet run
+        Write-Log "Starting Backend..."
+        dotnet run
     }
     catch {
         Write-Log "Backend failed: $_"
