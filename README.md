@@ -12,7 +12,8 @@ Node.js (React / Vue)
 🔍 Tracking execution flows and errors 
 🚀 Start development or production server (Frontend / Backend)
 ⚙️ Environment-based execution (dev / prod)
-🧠 DevOps-oriented workflow automation
+🧠 DevOps- run / builds
+🔍 Port checking
 
 
 ## 📁 Project Structure
@@ -67,6 +68,7 @@ Output:
 📦 Pulling latest code...
 🟢 Node project detected
 🚀 Starting dev server...
+🔍 Tracking project.log
 
 
 ## 💡 Author
