@@ -1,8 +1,7 @@
 param(
-  [string]$env = "dev"
-  [string]$project = "all" #frontend, backend, all
-  [string]$target = "run" #run / build
-
+  [string]$env = "dev",
+  [string]$project = "all", #frontend, backend, all
+  [string]$target = "run"  #run / build
 )
 
 Set-Location $PSScriptBoot
