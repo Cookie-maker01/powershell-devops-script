@@ -4,7 +4,7 @@ param(
   [string]$target = "run"  #run / build
 )
 
-Set-Location $PSScriptBoot
+Set-Location $PSScriptRoot
 
 #====== log =======
 
@@ -12,7 +12,7 @@ function Write-Log {
   param([string]$Message)
 
   $time = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-  $LogFile = "$PsscriptBoot\project.log"
+  $LogFile = "$PsscriptRoot\project.log"
 
   $msg = "$time - $Message"
 
@@ -51,12 +51,12 @@ function Install-Node {
         Write-Log "Installing Node dependencies..."
         if (!(Test-Path "node_modules")) {
         npm install
+      }
     }
-  }
+  }  
   catch {
     Write-Log "Dependency installation failed."
   }
- }
 }
 
 #==== Frontend ======
@@ -68,9 +68,13 @@ function Start-Frontend {
      Write-Log "Port $port already in use."
   } else {
     Write-Log "Starting Frontend on Port $port..."
-    Satrt-Process powershell -ArgumentList "npm run dev"
+    Start-Process powershell -ArgumentList "npm run dev"
     Start-Sleep 3
-    Start-Process "http://localhost:$port"
+
+    # Don't open browser if running in CI environment
+    if ($env -eq "dev") {
+        Start-Process "http://localhost:$port"
+    }
   }
 }
 
@@ -90,14 +94,19 @@ function Start-Backend {
 #==== Build (CI/CD) ======
 
 function Build-Project {
-  if (Test-Path "package.json") {
-    Write-Log "Building Frontend..."
-    npm run build
-  }
+  try {
+    if (Test-Path "package.json") {
+      Write-Log "Building Frontend..."
+      npm run build
+    }
 
-  if (Get-ChildItem *.csproj -ErrorAction SilentlyContinue) {
+  if (Get-ChildItem *.csproj -ErrorAction SilentlyContinue)   {
     Write-Log "Building Backend..."
     dotnet build
+  }
+}
+  catch {
+    Write-Log "Build failed: $_"
   }
 }
 
