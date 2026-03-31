@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      -name: Run PowerShell Script
+      - name: Run PowerShell Script
         shell: pwsh
         run: |
-          ./start.ps1 -targer build
+          ./start.ps1 -target build
