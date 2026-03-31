@@ -1,0 +1,19 @@
+name: PowerShell Devops Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-script:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      -name: Run PowerShell Script
+        shell: pwsh
+        run: |
+          ./start.ps1 -targer build
